@@ -341,6 +341,24 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+        {/* 3D Rotating Cube (Bada Size & Cleaned) */}
+    <div className="cube-container">
+      <div className="cube">
+        <div className="cube-face cube-face-front">
+          <img src="/logo.jpeg" alt="AI Hustlers Logo" />
+        </div>
+        <div className="cube-face cube-face-back">
+          <img src="/logo.jpeg" alt="AI Hustlers Logo" />
+        </div>
+        <div className="cube-face cube-face-right">
+          <img src="/logo.jpeg" alt="AI Hustlers Logo" />
+        </div>
+        <div className="cube-face cube-face-left">
+          <img src="/logo.jpeg" alt="AI Hustlers Logo" />
+        </div>
+      </div>
+    </div>
+
       {/* 4-Weekend Roadmap Section */}
       <section id="roadmap" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
