@@ -572,36 +572,125 @@ export default function ResourcesPage() {
       </section>
 
       {/* Footer Section */}
-      <footer style={{ borderTop: softBorder, background: 'var(--card-bg)', padding: '50px 20px 30px 20px', marginTop: '60px' }}>
-        <div className="footer-container" style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '30px', marginBottom: '40px' }}>
-          
-          <div style={{ maxWidth: '300px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <span style={{ background: '#ff5722', width: '10px', height: '10px', borderRadius: '50%', display: 'inline-block' }}></span>
-              <span style={{ fontWeight: 'bold', fontSize: '16px' }}>AI HUSTLERSS PRO</span>
-            </div>
-            <p style={{ fontSize: '13px', lineHeight: '1.5', opacity: 0.8 }}>
-              The high-tempo accelerator for builders, operators, and engineers mastering production-grade AI.
-            </p>
-          </div>
+<footer style={{ 
+  borderTop: softBorder, 
+  background: 'var(--card-bg)', 
+  padding: '60px 20px 30px 20px', 
+  marginTop: '80px',
+  position: 'relative'
+}}>
+  <div style={{ 
+    maxWidth: '1100px', 
+    margin: '0 auto', 
+    display: 'grid', 
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+    gap: '40px', 
+    marginBottom: '40px' 
+  }} className="footer-container">
+    
+    {/* Brand Info */}
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+        <span style={{ background: '#ff5722', width: '10px', height: '10px', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 10px #ff5722' }}></span>
+        <span style={{ fontWeight: '900', fontSize: '16px', letterSpacing: '-0.5px' }}>AI HUSTLERSS PRO</span>
+      </div>
+      <p style={{ fontSize: '13.5px', lineHeight: '1.6', opacity: 0.8, marginBottom: '20px' }}>
+        The high-tempo accelerator for builders, operators, and engineers mastering production-grade AI applications.
+      </p>
+      
+      {/* Social Media SVG Icons */}
+      <div style={{ display: 'flex', gap: '12px' }}>
+        
+        {/* Instagram */}
+        <a href="https://www.instagram.com/aihustlerrs?igsi=MTM5YnFyb2xudW10Ng==" target="_blank" rel="noopener noreferrer" title="Instagram" style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(255, 87, 34, 0.08)', border: '1px solid rgba(255, 87, 34, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', textDecoration: 'none' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
 
-          <div style={{ display: 'flex', gap: '50px', flexWrap: 'wrap' }}>
-            <div>
-              <div style={{ fontWeight: 'bold', fontSize: '14px', marginBottom: '12px' }}>Navigation</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '13px' }}>
-                <li><a href="#roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Curriculum</a></li>
-                <li><a href="#tech-stack" style={{ color: 'inherit', textDecoration: 'none' }}>AI Tech Stack</a></li>
-                <li><a href="#support" style={{ color: 'inherit', textDecoration: 'none' }}>Support</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        {/* Twitter / X */}
+        <a href="https://x.com/AIHustlerrs" target="_blank" rel="noopener noreferrer" title="Twitter" style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(255, 87, 34, 0.08)', border: '1px solid rgba(255, 87, 34, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', textDecoration: 'none' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
 
-        <div style={{ maxWidth: '1100px', margin: '0 auto', borderTop: softBorder, paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', flexWrap: 'wrap', gap: '10px', opacity: 0.8 }}>
-          <div>© 2026 AI Hustlerss Pro. All rights reserved.</div>
-          <div style={{ color: '#ff5722' }}>Built with high-tempo execution.</div>
-        </div>
-      </footer>
+        {/* LinkedIn */}
+        <a href="https://www.linkedin.com/company/ai-hustlerrss/" target="_blank" rel="noopener noreferrer" title="LinkedIn" style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(255, 87, 34, 0.08)', border: '1px solid rgba(255, 87, 34, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', textDecoration: 'none' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+
+        {/* Facebook */}
+        <a href="https://www.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=61593797930185&sk=about" target="_blank" rel="noopener noreferrer" title="Facebook" style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(255, 87, 34, 0.08)', border: '1px solid rgba(255, 87, 34, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ff5722', textDecoration: 'none' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+
+      </div>
+    </div>
+
+    {/* Quick Navigation Links */}
+    <div>
+      <div style={{ fontWeight: '800', fontSize: '14px', marginBottom: '15px', color: '#ff5722', letterSpacing: '0.5px' }}>NAVIGATION</div>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px' }}>
+        <li><a href="#roadmap" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.8 }}>Curriculum &amp; Roadmap</a></li>
+        <li><a href="#tech-stack" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.8 }}>AI Tech Stack</a></li>
+        <li><a href="#support" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.8 }}>Experience &amp; Support</a></li>
+        <li><a href="#faq" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.8 }}>FAQ</a></li>
+      </ul>
+    </div>
+
+    {/* Newsletter / Quick Contact info */}
+    <div>
+      <div style={{ fontWeight: '800', fontSize: '14px', marginBottom: '15px', color: '#ff5722', letterSpacing: '0.5px' }}>STAY UPDATED</div>
+      <p style={{ fontSize: '13px', opacity: '0.8', lineHeight: '1.5', marginBottom: '15px' }}>
+        Get notified about upcoming cohorts and exclusive AI workflow drops.
+      </p>
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <input 
+          type="email" 
+          placeholder="Your email address" 
+          style={{ 
+            background: 'var(--card-bg)', 
+            border: softBorder, 
+            borderRadius: '8px', 
+            padding: '10px 12px', 
+            color: 'var(--text-color)', 
+            fontSize: '13px', 
+            outline: 'none', 
+            flex: 1 
+          }}
+        />
+        <button style={{ 
+          backgroundColor: '#ff5722', 
+          color: '#fff', 
+          border: 'none', 
+          borderRadius: '8px', 
+          padding: '10px 14px', 
+          fontWeight: 'bold', 
+          cursor: 'pointer',
+          fontSize: '13px'
+        }}>
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  {/* Bottom Copyright Bar */}
+  <div style={{ 
+    maxWidth: '1100px', 
+    margin: '0 auto', 
+    borderTop: softBorder, 
+    paddingTop: '20px', 
+    display: 'flex', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    fontSize: '12px', 
+    flexWrap: 'wrap', 
+    gap: '10px', 
+    opacity: 0.8 
+  }}>
+    <div>© 2026 AI Hustlerss Pro. All rights reserved.</div>
+    <div style={{ color: '#ff5722', fontWeight: '600' }}>Built with high-tempo execution ⚡</div>
+  </div>
+</footer>
 
     </div>
   );
