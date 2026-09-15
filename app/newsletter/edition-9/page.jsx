@@ -27,7 +27,7 @@ export default function Edition5() {
 
         {/* Image */}
         <img 
-         src="/flow.jpeg" 
+         src="/flow2.jpeg" 
          alt="XRP Ledger Security" 
          style={{ width: '80%', height: 'auto', borderRadius: '4px', border: '1px solid #3f3f46', marginBottom: '25px' }} 
         />
