@@ -1,7 +1,45 @@
 @import "tailwindcss";
+
 html {
     scroll-behavior: smooth;
 }
+
+/* Cinematic Intro Keyframes */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeOutIntro {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.animate-letter-reveal {
+  animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOutIntro 0.8s ease-in-out 2.1s forwards;
+}
+
 /* Breathing Dot Animation */
 @keyframes pulse-dot {
   0% { transform: scale(0.8); opacity: 0.5; }
@@ -75,9 +113,6 @@ body.light-mode .animated-pill {
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
 }
 
-body.light-mode .marquee-container {
-  opacity: 1;
-}
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -92,7 +127,8 @@ body.light-mode .marquee-container {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
-/* 3D Rotating Cube Styles (Bada Size: 120px) */
+
+/* 3D Rotating Cube Styles */
 .cube-container {
   perspective: 1200px;
   width: 120px;
@@ -128,7 +164,6 @@ body.light-mode .marquee-container {
   object-fit: cover;
 }
 
-/* 4 Sides positioning for 120px width (translateZ = width / 2 = 60px) */
 .cube-face-front  { transform: rotateY(0deg) translateZ(60px); }
 .cube-face-back   { transform: rotateY(180deg) translateZ(60px); }
 .cube-face-right  { transform: rotateY(90deg) translateZ(60px); }
