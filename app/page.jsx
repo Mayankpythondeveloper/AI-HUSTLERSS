@@ -183,12 +183,12 @@ const handleSubscribe = async (e) => {
     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
       <a href="/newsletters-list" className="hover:text-orange-500 transition-colors">Newsletters</a>
       <a href="/explore" className="hover:text-orange-500 transition-colors">Archieve</a>
-      <a href="/resources" className="hover:text-orange-500 transition-colors">Resources</a>
+      <a href="/resources" target="_blank" className="hover:text-orange-500 transition-colors">Resources</a>
     </nav>
 
     {/* Desktop Subscribe Button */}
     <div className="hidden md:block">
-      <a href="#tools" className="bg-orange-500 hover:bg-orange-600 text-black font-bold px-5 py-2.5 rounded-full transition-all shadow-[0_0_20px_rgba(255,87,34,0.4)]">
+      <a href="subscribe" target="_blank" className="bg-orange-500 hover:bg-orange-600 text-black font-bold px-5 py-2.5 rounded-full transition-all shadow-[0_0_20px_rgba(255,87,34,0.4)]">
         Subscribe for free
       </a>
     </div>
@@ -219,7 +219,7 @@ const handleSubscribe = async (e) => {
         Newsletters
       </a>
       <a 
-        href="/about" 
+        href="/explore" 
         onClick={() => setMobileMenuOpen(false)}
         className="text-gray-300 hover:text-orange-500 font-medium text-base py-2 border-b border-white/5"
       >
@@ -227,6 +227,7 @@ const handleSubscribe = async (e) => {
       </a>
       <a 
         href="/resources" 
+        target="_blank"
         onClick={() => setMobileMenuOpen(false)}
         className="text-gray-300 hover:text-orange-500 font-medium text-base py-2 border-b border-white/5"
       >
@@ -234,7 +235,8 @@ const handleSubscribe = async (e) => {
       </a>
       <div className="pt-2">
         <a 
-          href="#tools" 
+          href="subscribe" 
+          target="_blank"
           onClick={() => setMobileMenuOpen(false)}
           className="block text-center bg-orange-500 hover:bg-orange-600 text-black font-bold px-5 py-3 rounded-full transition-all shadow-[0_0_20px_rgba(255,87,34,0.4)]"
         >
