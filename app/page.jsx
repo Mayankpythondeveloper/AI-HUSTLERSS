@@ -2,19 +2,85 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Cpu, Rocket, ShieldCheck, Zap } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import image from "next/image";
 
 export default function Home() {
-  // Cinematic Intro Animation State
   const [introDone, setIntroDone] = useState(false);
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const [titleCount, setTitleCount] = useState(0);
+  const [subtitleCount, setSubtitleCount] = useState(0);
+
+  const [emailInput, setEmailInput] = useState('');
+const [statusMessage, setStatusMessage] = useState('');
+const [loading, setLoading] = useState(false);
+
+const handleSubscribe = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setStatusMessage('');
+
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: emailInput }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      setStatusMessage('🎉 Redirecting...');
+      setTimeout(() => {
+        router.push('/thank-you');
+      }, 1000);
+    } else {
+      setStatusMessage(data.error || 'Something went wrong.');
+    }
+  } catch (err) {
+    setStatusMessage('Network error. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
+  const mainText = "AI HUSTLERSS";
+  const subText = "AUTONOMOUS AI NEWSLETTER // 2026";
 
   useEffect(() => {
-    // Timer to finish intro animation after ~2.8 seconds
+    // 1. Type main title letter by letter
+    const titleInterval = setInterval(() => {
+      setTitleCount((prev) => {
+        if (prev < mainText.length) {
+          return prev + 1;
+        } else {
+          clearInterval(titleInterval);
+          return prev;
+        }
+      });
+    }, 90);
+
+    // 2. Type subtitle after main title finishes
+    const subTimeout = setTimeout(() => {
+      const subInterval = setInterval(() => {
+        setSubtitleCount((prev) => {
+          if (prev < subText.length) {
+            return prev + 1;
+          } else {
+            clearInterval(subInterval);
+            return prev;
+          }
+        });
+      }, 45);
+      return () => clearInterval(subInterval);
+    }, mainText.length * 90 + 300);
+
+    // 3. Finish intro and reveal main website completely after 4.5 seconds
     const timer = setTimeout(() => {
       setIntroDone(true);
-    }, 2800);
+    }, 4500);
 
-    // Subdomain check karke immediate auto-scroll karne ka logic
     if (window.location.hostname.includes('newsletter')) {
       const ctaSection = document.getElementById('tools');
       if (ctaSection) {
@@ -22,36 +88,87 @@ export default function Home() {
       }
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearInterval(titleInterval);
+      clearTimeout(subTimeout);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-orange-500 selection:text-black relative overflow-x-hidden">
       
-      {/* ==========================================
-          CINEMATIC INTRO OVERLAY (COMMANDER STYLE)
-          ========================================== */}
-      {!introDone && (
-        <div className="fixed inset-0 z-[9999] bg-[#030303] flex flex-col items-center justify-center animate-fade-out">
-          <div className="text-center">
-            {/* Letter-by-letter revealing brand title */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-[0.2em] uppercase text-white flex justify-center overflow-hidden">
-              {"AI HUSTLERS".split("").map((letter, index) => (
-                <span 
-                  key={index} 
-                  className="inline-block animate-letter-reveal opacity-0"
-                  style={{ animationDelay: `${index * 0.15}s` }}
-                >
-                  {letter}
-                </span>
-              ))}
-            </h1>
-            <p className="mt-4 text-xs sm:text-sm font-mono tracking-[0.40em] text-orange-500 uppercase animate-pulse">
-              AUTONOMOUS AI NEWSLETTER // 2026
-            </p>
-          </div>
-        </div>
+      {/* CINEMATIC INTRO SCREEN WITH NEON LASER & PARTICLE EXPLOSION */}
+{!introDone && (
+  <div className="fixed inset-0 z-[99999] bg-black flex flex-col items-center justify-center overflow-hidden">
+    
+    {/* Global Keyframes for Laser and Particle Animation */}
+    <style dangerouslySetInnerHTML={{ __html: `
+      @keyframes laserDrop {
+        0% { transform: translateY(-100vh); opacity: 1; height: 150px; }
+        70% { transform: translateY(0); opacity: 1; height: 80px; }
+        85% { transform: translateY(0); opacity: 0.8; height: 20px; }
+        100% { transform: translateY(0); opacity: 0; height: 0px; }
+      }
+      @keyframes particleBurst {
+        0% { transform: scale(0.1); opacity: 1; }
+        50% { transform: scale(1.8); opacity: 0.8; filter: blur(2px); }
+        100% { transform: scale(3.5); opacity: 0; filter: blur(8px); }
+      }
+      @keyframes logoReveal {
+        0% { transform: scale(0.3); opacity: 0; filter: brightness(2); }
+        70% { transform: scale(1.05); opacity: 1; filter: brightness(1.2); }
+        100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+      }
+      .animate-laser {
+        animation: laserDrop 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      }
+      .animate-burst {
+        animation: particleBurst 0.7s ease-out 0.7s forwards;
+      }
+      .animate-logo-reveal {
+        animation: logoReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+      }
+    `}} />
+
+    {/* Neon Laser Beam falling from top */}
+    <div className="absolute top-0 w-1 bg-gradient-to-b from-transparent via-orange-400 to-orange-600 shadow-[0_0_25px_#ff5722] animate-laser pointer-events-none z-10"></div>
+
+    {/* Logo Container with Particle Explosion & Reveal */}
+    <div className="relative mb-8 flex flex-col items-center">
+      
+      {/* Particle Explosion Ring on Impact */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute w-48 h-48 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 animate-burst"></div>
+        <div className="absolute w-36 h-36 rounded-full border-2 border-orange-400 opacity-0 animate-burst" style={{ animationDelay: '0.65s' }}></div>
+      </div>
+
+      {/* Glowing Logo emerging from the explosion */}
+      <img 
+        src="/logo.jpeg" 
+        alt="AI HUSTLERSS Logo" 
+        className="h-28 md:h-36 w-auto object-contain rounded-2xl shadow-[0_0_50px_rgba(255,87,34,0.8)] border border-orange-500/30 opacity-0 animate-logo-reveal"
+      />
+    </div>
+
+    {/* Main Title Typing Effect */}
+    <div className="text-3xl md:text-5xl font-extrabold tracking-widest text-white font-mono min-h-[45px] flex items-center">
+      <span>{mainText.slice(0, titleCount)}</span>
+      {titleCount < mainText.length && (
+        <span className="animate-ping ml-1 w-2.5 h-6 bg-orange-500 inline-block"></span>
       )}
+    </div>
+
+    {/* Subtitle Typing Effect */}
+    <div className="mt-4 text-xs md:text-sm tracking-[0.3em] text-orange-500 font-semibold uppercase font-mono min-h-[24px] flex items-center">
+      <span>{subText.slice(0, subtitleCount)}</span>
+      {titleCount >= mainText.length && subtitleCount < subText.length && (
+        <span className="animate-ping ml-1 w-2 h-4 bg-orange-500 inline-block"></span>
+      )}
+    </div>
+
+  </div>
+)}
       
       {/* HEADER / NAVBAR */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
@@ -65,7 +182,7 @@ export default function Home() {
     {/* Desktop Navigation Links */}
     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
       <a href="/newsletters-list" className="hover:text-orange-500 transition-colors">Newsletters</a>
-      <a href="/explore" className="hover:text-orange-500 transition-colors">Archieve</a>
+      <a href="/about" className="hover:text-orange-500 transition-colors">Archieve</a>
       <a href="/resources" className="hover:text-orange-500 transition-colors">Resources</a>
     </nav>
 
@@ -128,57 +245,93 @@ export default function Home() {
   )}
 </header>
 
-      {/* HERO SECTION */}
-      <section className="pt-36 pb-20 md:pt-48 md:pb-32 px-6 relative overflow-hidden">
-        {/* Background Logo Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
-          <img src="/logo.jpeg" alt="Watermark" className="w-[1100px] h-auto object-contain blur-[2px]" />
-        </div>
-
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold text-orange-400 mb-6">
-            <Zap size={14} />
-            <span>POWERING THE NEXT-GEN AI REVOLUTION</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-8">
-             Build, Scale and Monetize with <span className="text-orange-500">AI HUSTLERS</span>
-          </h1>
-           <p className="text-gray-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
-            Get the sharpest AI insights, cutting-edge workflows, and growth blueprints delivered straight to your inbox.
-          </p>
-
-          {/* Buttons Container */}
-          <div className="flex flex-col items-center justify-center gap-4 mt-6">
+      {/* HERO SECTION WITH BEEHIIV EMBED CONTAINER */}
+<section className="pt-24 pb-20 md:pt-36 md:pb-32 px-6 relative overflow-hidden">
   
-          {/* Explore AI Tools */}
-           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-           <a href="/resources" className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 flex items-center justify-center space-x-2">
-           <span>Explore AI Tools</span>
-         <ArrowRight size={18} />
-          </a>
+  {/* Background Logo Watermark */}
+  <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
+    <img src="/logo.jpeg" alt="Watermark" className="w-[1100px] h-auto object-contain blur-[2px]" />
+  </div>
 
-         {/* Join the Hustle Button */}
-         <a href="#tools" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center">
-           Join the Hustle
-         </a>
-         </div>
+  <div className="max-w-5xl mx-auto text-center relative z-10">
+    
+    {/* Top Badge */}
+    <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold text-orange-400 mb-6 shadow-[0_0_15px_rgba(255,87,34,0.2)]">
+      <Zap size={14} />
+      <span>POWERING THE NEXT-GEN AI REVOLUTION</span>
+    </div>
 
-           {/* LinkedIn Button */}
-           <a 
-             href="https://www.linkedin.com/company/ai-hustlerrss/" 
-             target="_blank" 
-              rel="noopener noreferrer" 
-            className="bg-[#0A66C2] hover:bg-[#095196] text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 inline-flex items-center justify-center space-x-2"
-          >
-             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-               <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.95h2.79v8.37H6.46v-8.37M7.85 6.25a1.62 1.62 0 1 0 1.62 1.62c-.01-.9-.73-1.61-1.62-1.62z"/>
-            </svg>
-          <span>Follow on LinkedIn</span>
-         </a>
-        </div>
+    {/* Main Heading */}
+    <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+      Build, Scale and Monetize with <span className="text-orange-500">AI HUSTLERSS</span>
+    </h1>
+
+    {/* Subtitle */}
+    <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
+      Get the sharpest AI insights, cutting-edge workflows, and growth blueprints delivered straight to your inbox.
+    </p>
+
+    {/* CUSTOM DESIGNED HERO EMAIL BOX CONNECTED TO BACKEND */}
+<div className="max-w-xl mx-auto mb-4">
+  <form onSubmit={handleSubscribe} className="p-2 bg-white/5 border border-white/15 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(255,87,34,0.2)] flex flex-col sm:flex-row gap-3">
+    <input 
+      type="email" 
+      required
+      value={emailInput}
+      onChange={(e) => setEmailInput(e.target.value)}
+      placeholder="Enter your email address..." 
+      className="bg-black/60 border border-white/10 px-5 py-4 rounded-xl text-white outline-none focus:border-orange-500 w-full placeholder:text-gray-500 text-sm md:text-base"
+    />
+    <button 
+      type="submit"
+      disabled={loading}
+      className="bg-orange-500 hover:bg-orange-600 text-black font-extrabold px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,87,34,0.4)] hover:scale-105 whitespace-nowrap text-sm md:text-base flex items-center justify-center space-x-2"
+    >
+      <span>{loading ? 'Subscribing...' : 'Subscribe'}</span>
+      <Zap size={16} />
+    </button>
+  </form>
+
+  {/* Status Message Display */}
+  {statusMessage && (
+    <p className={`mt-3 text-sm font-semibold ${statusMessage.includes('Success') ? 'text-green-400' : 'text-orange-400'}`}>
+      {statusMessage}
+    </p>
+  )}
+</div>
+
+    {/* Preserved Buttons Container */}
+    <div className="flex flex-col items-center justify-center gap-4 mt-4">
+      
+      {/* Explore AI Tools & Join the Hustle */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
+        
+        <a href="/resources" className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 flex items-center justify-center space-x-2">
+          <span>Explore AI Tools</span>
+          <ArrowRight size={18} />
+        </a>
+
+        <a href="#tools" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-white/15 flex items-center justify-center">
+          Join the Hustle
+        </a>
       </div>
 
-    </section>    
+      {/* Follow on LinkedIn Button */}
+      <a 
+        href="https://www.linkedin.com/company/ai-hustlerrss/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="bg-[#0A66C2] hover:bg-[#095196] text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 inline-flex items-center justify-center space-x-2"
+      >
+        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.95h2.79v8.37H6.46v-8.37M7.85 6.25a1.62 1.62 0 1 0 1.62 1.62c-.01-.9-.73-1.61-1.62-1.62z"/>
+        </svg>
+        <span>Follow on LinkedIn</span>
+      </a>
+
+    </div>
+  </div>
+</section>    
     
       {/* SLIDING STACK MARQUEE SECTION */}
       <div style={{ fontSize: '11px', letterSpacing: '1.5px', marginBottom: '15px', fontWeight: 'bold', textAlign: 'center', transition: 'color 0.3s ease-in-out' }}>
@@ -211,44 +364,11 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">The AI Hustlers Newsletter</h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Get cutting-edge AI workflows, automated prompts, and digital scaling blueprints delivered straight to your inbox.
-            </p>
           </div>
 
-          {/* Email Subscription Box */}
-<div className="bg-gradient-to-b from-gray-900/80 to-black border border-white/10 rounded-3xl p-8 md:p-12 max-w-2xl mx-auto text-center shadow-2xl relative overflow-hidden backdrop-blur-xl">
-  
-  {/* Subtle glow background */}
-  <div className="absolute -top-24 -left-24 w-48 h-48 bg-orange-600/20 rounded-full blur-3xl pointer-events-none"></div>
-  <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
 
-  <h3 className="text-3xl font-extrabold mb-3 text-white tracking-tight">Super Charge Your AI Hustlers Journey.</h3>
-  <p className="text-gray-400 text-sm md:text-base mb-8">
-    Enter your email below to subscribe and receive our latest editions instantly.
-  </p>
-
-  {/* Brevo Form Container with Dark Filter Blend */}
-  <div className="relative w-full overflow-hidden rounded-xl flex justify-center items-center bg-transparent">
-    <iframe
-      src="https://8cb09a41.sibforms.com/v2/serve/MUIFAEhaudA5PuDnUwLnQmqzbGTP6kb9AlUQ0W_zM204J1syDYuue9Srp97SDnq6boGgXs6bmFczQkuRTCFMEcVSyzCojhCtB9F5102IFJI4kRuTRdzRN_CRuL_CdWxOafQuxw5oDLDmtajh8uJfPGz2sswiKs8bGBirpSjAewzeKT6j8tUtpuLX6RM6fuv81L8tS8nb8pNKGixrAA=="
-      className="w-full"
-      width="100%"
-      height="300"
-      frameBorder="0"
-      scrolling="no"
-      allowFullScreen
-      style={{
-        display: 'block',
-        background: 'transparent',
-        colorScheme: 'dark',
-        filter: 'invert(1) hue-rotate(130deg) brightness(1.1) contrast(1.1)',
-        mixBlendMode: 'screen',
-        paddingTop: '0px',
-      }}
-    />
-  </div>
-</div>
+          
 
           {/* Past Newsletters Archive List */}
           <div className="mt-12">
@@ -512,7 +632,7 @@ export default function Home() {
             <ul className="space-y-2 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
               <li><a href="/newsletters-list" className="hover:text-white transition-colors">Newsletter</a></li>
-              <li><a href="/explore" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
             </ul>
           </div>
 
