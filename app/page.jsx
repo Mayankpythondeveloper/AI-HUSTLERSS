@@ -246,14 +246,17 @@ const handleSubscribe = async (e) => {
     </div>
   )}
 </header>
+      
 
       {/* HERO SECTION WITH BEEHIIV EMBED CONTAINER */}
-<section className="pt-24 pb-20 md:pt-36 md:pb-32 px-6 relative overflow-hidden">
+<section className="pt-24 pb-20 md:pt-36 md:pb-32 px-6 relative overflow-hidden bg-black">
   
-  {/* Background Logo Watermark */}
+  {/* 1. AI Watermark Removed (Background Logo Watermark Div Commented Out) */}
+  {/* 
   <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none z-0">
     <img src="/logo.jpeg" alt="Watermark" className="w-[1100px] h-auto object-contain blur-[2px]" />
   </div>
+  */}
 
   <div className="max-w-5xl mx-auto text-center relative z-10">
     
@@ -263,8 +266,8 @@ const handleSubscribe = async (e) => {
       <span>POWERING THE NEXT-GEN AI REVOLUTION</span>
     </div>
 
-    {/* Main Heading */}
-    <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+    {/* 2. Main Heading Style Changed: Font size smaller (md:text-5xl instead of md:text-6xl), font-bold instead of font-extrabold */}
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6 text-white">
       Build, Scale and Monetize with <span className="text-orange-500">AI HUSTLERSS</span>
     </h1>
 
@@ -273,59 +276,59 @@ const handleSubscribe = async (e) => {
       Get the sharpest AI insights, cutting-edge workflows, and growth blueprints delivered straight to your inbox.
     </p>
 
-    {/* CUSTOM DESIGNED HERO EMAIL BOX CONNECTED TO BACKEND */}
-<div className="max-w-xl mx-auto mb-4">
-  <form onSubmit={handleSubscribe} className="p-2 bg-white/5 border border-white/15 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(255,87,34,0.2)] flex flex-col sm:flex-row gap-3">
-    <input 
-      type="email" 
-      required
-      value={emailInput}
-      onChange={(e) => setEmailInput(e.target.value)}
-      placeholder="Enter your email address..." 
-      className="bg-black/60 border border-white/10 px-5 py-4 rounded-xl text-white outline-none focus:border-orange-500 w-full placeholder:text-gray-500 text-sm md:text-base"
-    />
-    <button 
-      type="submit"
-      disabled={loading}
-      className="bg-orange-500 hover:bg-orange-600 text-black font-extrabold px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,87,34,0.4)] hover:scale-105 whitespace-nowrap text-sm md:text-base flex items-center justify-center space-x-2"
-    >
-      <span>{loading ? 'Subscribing...' : 'Subscribe'}</span>
-      <Zap size={16} />
-    </button>
-  </form>
+    {/* CUSTOM DESIGNED HERO EMAIL BOX CONNECTED TO BACKEND - Email box is preserved exactly as requested */}
+    <div className="max-w-xl mx-auto mb-6">
+      <form onSubmit={handleSubscribe} className="p-2 bg-white/5 border border-white/15 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(255,87,34,0.2)] flex flex-col sm:flex-row gap-3">
+        <input 
+          type="email" 
+          required
+          value={emailInput}
+          onChange={(e) => setEmailInput(e.target.value)}
+          placeholder="Enter your email address..." 
+          className="bg-black/60 border border-white/10 px-5 py-4 rounded-xl text-white outline-none focus:border-orange-500 w-full placeholder:text-gray-500 text-sm md:text-base"
+        />
+        <button 
+          type="submit"
+          disabled={loading}
+          className="bg-orange-500 hover:bg-orange-600 text-black font-extrabold px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,87,34,0.4)] hover:scale-105 whitespace-nowrap text-sm md:text-base flex items-center justify-center space-x-2"
+        >
+          <span>{loading ? 'Subscribing...' : 'Subscribe'}</span>
+          <Zap size={16} />
+        </button>
+      </form>
 
-  {/* Status Message Display */}
-  {statusMessage && (
-    <p className={`mt-3 text-sm font-semibold ${statusMessage.includes('Success') ? 'text-green-400' : 'text-orange-400'}`}>
-      {statusMessage}
-    </p>
-  )}
-</div>
+      {/* Status Message Display */}
+      {statusMessage && (
+        <p className={`mt-3 text-sm font-semibold ${statusMessage.includes('Success') ? 'text-green-400' : 'text-orange-400'}`}>
+          {statusMessage}
+        </p>
+      )}
+    </div>
 
-    {/* Preserved Buttons Container */}
-    <div className="flex flex-col items-center justify-center gap-4 mt-4">
+    {/* 3. Buttons Container - Padding adjusted for smaller buttons */}
+    <div className="flex flex-col items-center justify-center gap-4 mt-6">
       
-      {/* Explore AI Tools & Join the Hustle */}
+      {/* Explore AI Tools & Join the Hustle - Buttons made slightly smaller (px-6 instead of px-8, text-sm instead of text-base) */}
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto">
         
-        <a href="/resources" className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 flex items-center justify-center space-x-2">
+        <a href="/resources" className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-black font-bold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 flex items-center justify-center space-x-2 text-sm">
           <span>Explore AI Tools</span>
-          <ArrowRight size={18} />
+          <ArrowRight size={16} />
         </a>
 
-        <a href="#tools" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:bg-white/15 flex items-center justify-center">
+        <a href="#tools" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:bg-white/15 flex items-center justify-center text-sm">
           Join the Hustle
         </a>
       </div>
 
-      {/* Follow on LinkedIn Button */}
+      {/* Follow on LinkedIn Button - Button made slightly smaller (px-5 instead of px-6, text-sm) */}
       <a 
         href="https://www.linkedin.com/company/ai-hustlerrss/" 
         target="_blank" 
         rel="noopener noreferrer" 
-        className="bg-[#0A66C2] hover:bg-[#095196] text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 inline-flex items-center justify-center space-x-2"
+        className="bg-[#0A66C2] hover:bg-[#095196] text-white font-bold px-5 py-3 rounded-xl transition-all duration-300 shadow-lg hover:scale-105 inline-flex items-center justify-center space-x-2 text-sm"
       >
-        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
           <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.95h2.79v8.37H6.46v-8.37M7.85 6.25a1.62 1.62 0 1 0 1.62 1.62c-.01-.9-.73-1.61-1.62-1.62z"/>
         </svg>
         <span>Follow on LinkedIn</span>
