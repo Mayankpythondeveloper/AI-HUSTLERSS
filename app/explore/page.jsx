@@ -208,7 +208,7 @@ export default function AboutPage() {
             <div className="h-72 w-full bg-neutral-950 rounded-2xl overflow-hidden border border-neutral-800/80 relative flex items-center justify-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.1)_0,transparent_70%)]"></div>
               <Image 
-                src="/about/about1.jpeg" 
+                src="/about1.jpeg" 
                 alt="Mayank Sahu" 
                 fill 
                 className="object-cover object-center group-hover:scale-105 transition duration-500"
