@@ -645,7 +645,7 @@ const handleSubscribe = async (e) => {
             <h3 className="text-white font-semibold text-lg mb-4">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>
 
