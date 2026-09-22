@@ -46,7 +46,7 @@ const handleSubscribe = async (e) => {
 };
 
   const mainText = "AI HUSTLERSS";
-  const subText = "AUTONOMOUS AI NEWSLETTER // 2026";
+  const subText = "AUTONOMOUS AI NEWSLETTER ⚡ 2026";
 
   useEffect(() => {
     // 1. Type main title letter by letter
