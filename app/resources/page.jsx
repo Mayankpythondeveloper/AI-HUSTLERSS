@@ -44,7 +44,7 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <div style={{ 
+    <div className="resources-page" style={{ 
       backgroundColor: 'var(--bg-color)', 
       color: 'var(--text-color)', 
       minHeight: '100vh',
@@ -70,12 +70,146 @@ export default function ResourcesPage() {
 
         /* Hover Glow & Popup Effect for Cards */
         .hover-card-effect {
-          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+          position: relative;
+          overflow: hidden;
+          border-radius: 12px !important;
+          transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease !important;
+          animation: cardEnter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+        .hover-card-effect::before {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          left: 14px;
+          right: 14px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ff5722, transparent);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.35s ease;
         }
         .hover-card-effect:hover {
-          transform: translateY(-6px) !important;
-          box-shadow: 0 12px 35px rgba(255, 87, 34, 0.25) !important;
-          border-color: rgba(255, 87, 34, 0.5) !important;
+          transform: translateY(-5px) !important;
+          box-shadow: 0 18px 38px rgba(255, 87, 34, 0.16) !important;
+          border-color: rgba(255, 87, 34, 0.42) !important;
+        }
+        .hover-card-effect:hover::before {
+          transform: scaleX(1);
+        }
+
+        @keyframes cardEnter {
+          from { opacity: 0; transform: translateY(18px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroEnter {
+          from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+          to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        @keyframes faqReveal {
+          from { opacity: 0; transform: translateY(-6px); }
+          to { opacity: 0.9; transform: translateY(0); }
+        }
+
+        .resources-page {
+          position: relative;
+          background-image: linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+          background-size: 44px 44px;
+        }
+        .resources-page header {
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        .resources-page section {
+          scroll-margin-top: 92px;
+        }
+        .resources-page h2 {
+          text-wrap: balance;
+          line-height: 1.12 !important;
+        }
+        .resources-page h3 {
+          text-wrap: balance;
+        }
+        .resources-page a,
+        .resources-page button {
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+        }
+        .resources-page a:hover,
+        .resources-page button:hover {
+          transform: translateY(-2px);
+        }
+        .resources-page a:focus-visible,
+        .resources-page button:focus-visible,
+        .resources-page input:focus-visible {
+          outline: 2px solid #ff5722;
+          outline-offset: 3px;
+        }
+        .hero-section {
+          position: relative;
+          isolation: isolate;
+        }
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          inset: 0 8% 12%;
+          border: 1px solid rgba(255, 87, 34, 0.08);
+          border-radius: 18px;
+          background: linear-gradient(135deg, rgba(255, 87, 34, 0.055), transparent 48%, rgba(56, 189, 248, 0.035));
+          pointer-events: none;
+        }
+        .hero-section > * {
+          animation: heroEnter 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+        .hero-section > :nth-child(2) { animation-delay: 0.08s; }
+        .hero-section > :nth-child(3) { animation-delay: 0.16s; }
+        .hero-section > :nth-child(4) { animation-delay: 0.24s; }
+        .hero-section > :nth-child(5) { animation-delay: 0.32s; }
+        .tech-stack-section {
+          background-image: linear-gradient(110deg, rgba(255, 87, 34, 0.06), transparent 42%, rgba(56, 189, 248, 0.045));
+        }
+        .comparison-section,
+        .roadmap-section,
+        .support-section,
+        .finale-section,
+        .testimonials-section,
+        .faq-section,
+        .pricing-section {
+          position: relative;
+        }
+        .comparison-section,
+        .support-section,
+        .testimonials-section {
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.018) 50%, transparent);
+        }
+        .responsive-grid-2 > .hover-card-effect:nth-child(2),
+        .responsive-grid-3 > .hover-card-effect:nth-child(2),
+        .responsive-grid-4 > .hover-card-effect:nth-child(2) { animation-delay: 0.08s; }
+        .responsive-grid-3 > .hover-card-effect:nth-child(3),
+        .responsive-grid-4 > .hover-card-effect:nth-child(3) { animation-delay: 0.16s; }
+        .responsive-grid-4 > .hover-card-effect:nth-child(4) { animation-delay: 0.24s; }
+        .faq-section .hover-card-effect {
+          cursor: pointer;
+          transition: padding 0.25s ease, border-color 0.25s ease, transform 0.25s ease !important;
+        }
+        .faq-section .hover-card-effect > div:last-child {
+          animation: faqReveal 0.25s ease both;
+        }
+        .pricing-section {
+          background: linear-gradient(180deg, transparent, rgba(255, 87, 34, 0.045), transparent);
+        }
+        .pricing-section > div {
+          background-image: linear-gradient(145deg, rgba(255, 87, 34, 0.075), transparent 52%);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .resources-page *,
+          .resources-page *::before,
+          .resources-page *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0.01ms !important;
+          }
         }
 
         /* Global Responsive Breakpoints */
@@ -105,6 +239,16 @@ export default function ResourcesPage() {
           }
           .hero-title {
             font-size: 28px !important;
+          }
+          .resources-page h2 {
+            font-size: 28px !important;
+          }
+          .hero-section::before {
+            inset: 0 0 12%;
+          }
+          .hover-card-effect {
+            padding-left: 22px !important;
+            padding-right: 22px !important;
           }
           .footer-container {
             flex-direction: column !important;
@@ -177,7 +321,7 @@ export default function ResourcesPage() {
       </header>
 
       {/* Hero Section */}
-      <section style={{ 
+      <section className="hero-section" style={{ 
         textAlign: 'center', 
         padding: '60px 20px 80px 20px', 
         marginTop: '80px', 
@@ -268,7 +412,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Sliding Tech Stack Marquee Section */}
-      <section id="tech-stack" style={{ 
+      <section id="tech-stack" className="tech-stack-section" style={{ 
         borderTop: softBorder, 
         borderBottom: softBorder, 
         padding: '25px 0', 
@@ -303,7 +447,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Comparison Section */}
-      <section style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section className="comparison-section" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <div style={{ display: 'inline-block', fontSize: '11px', color: '#ff5722', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '15px', textTransform: 'uppercase' }}>
             No More Shelfware Courses
@@ -341,7 +485,10 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-        {/* 3D Rotating Cube (Bada Size & Cleaned) */}
+        
+        
+    
+    {/* 3D Rotating Cube (Bada Size & Cleaned) */}
     <div className="cube-container">
       <div className="cube">
         <div className="cube-face cube-face-front">
@@ -359,8 +506,10 @@ export default function ResourcesPage() {
       </div>
     </div>
 
+
+
       {/* 4-Weekend Roadmap Section */}
-      <section id="roadmap" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section id="roadmap" className="roadmap-section" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#ff5722', fontWeight: 'bold', border: '1px solid rgba(255, 87, 34, 0.25)', backgroundColor: 'rgba(255, 87, 34, 0.08)', padding: '5px 14px', borderRadius: '20px', marginBottom: '15px' }}>
             <span>🚀 4-WEEKEND ROADMAP</span>
@@ -414,7 +563,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Support Section */}
-      <section id="support" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section id="support" className="support-section" style={{ padding: '80px 20px', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <div style={{ display: 'inline-block', fontSize: '12px', fontWeight: '800', color: '#ff5722', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '10px' }}>
             Support That Never Sleeps
@@ -441,7 +590,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Capstone Section */}
-      <section id="finale" style={{ padding: '40px 20px 80px 20px', maxWidth: '1000px', margin: '0 auto' }}>
+      <section id="finale" className="finale-section" style={{ padding: '40px 20px 80px 20px', maxWidth: '1000px', margin: '0 auto' }}>
         <div className="responsive-grid-2 hover-card-effect" style={{ 
           background: 'var(--card-bg)', border: softBorder, boxShadow: cardShadow,
           borderRadius: '24px', padding: '45px', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '35px', alignItems: 'center'
@@ -471,7 +620,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section id="testimonials" className="testimonials-section" style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <div style={{ display: 'inline-block', fontSize: '12px', fontWeight: '800', color: '#ff5722', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '10px' }}>
             Real Builders. Real Numbers.
@@ -503,7 +652,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Interactive FAQ Section */}
-      <section id="faq" style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
+      <section id="faq" className="faq-section" style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <span style={{ fontSize: '12px', color: '#ff5722', fontWeight: 'bold', letterSpacing: '1px' }}>CLEAR ANSWERS</span>
           <h2 style={{ fontSize: '38px', fontWeight: '800', marginTop: '10px' }}>Frequently Asked Questions</h2>
@@ -534,8 +683,11 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+          
+      
+
       {/* Pricing / CTA Section */}
-      <section id="pricing" style={{ padding: '80px 20px 100px 20px', textAlign: 'center' }}>
+      <section id="pricing" className="pricing-section" style={{ padding: '80px 20px 100px 20px', textAlign: 'center' }}>
         <div className="hover-card-effect" style={{ maxWidth: '700px', margin: '0 auto', border: softBorder, borderRadius: '24px', padding: '40px 20px', background: 'var(--card-bg)', boxShadow: cardShadow }}>
           
           <div style={{ display: 'inline-block', backgroundColor: '#1e293b', color: '#ff5722', fontSize: '12px', padding: '6px 14px', borderRadius: '20px', marginBottom: '20px', fontWeight: 'bold' }}>
@@ -572,7 +724,8 @@ export default function ResourcesPage() {
       </section>
 
       {/* Footer Section */}
-<footer style={{ 
+{/* Footer Section */}
+<footer className="resources-footer" style={{ 
   borderTop: softBorder, 
   background: 'var(--card-bg)', 
   padding: '60px 20px 30px 20px', 
