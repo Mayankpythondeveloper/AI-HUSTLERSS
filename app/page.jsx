@@ -182,7 +182,7 @@ const handleSubscribe = async (e) => {
     {/* Desktop Navigation Links */}
     <nav className="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
       <a href="/newsletters-list" className="hover:text-orange-500 transition-colors">Newsletters</a>
-      <a href="/explore" className="hover:text-orange-500 transition-colors">Archieve</a>
+      <a href="/explore" className="hover:text-orange-500 transition-colors">Archive</a>
       <a href="/resources" target="_blank" className="hover:text-orange-500 transition-colors">Resources</a>
     </nav>
 
